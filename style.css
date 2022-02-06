@@ -1,0 +1,18 @@
+body{
+  background-color: rgb(68, 15, 99);
+}
+
+h1{
+  color: rgb(245, 243, 243);
+  font-weight: bolder;
+  text-align: center;
+}
+
+#game div {
+  border: 1px solid black;
+  width: 15%;
+  height: 200px;
+  margin: 10px;
+  display: inline-block;
+  margin-left: 45px;
+}
