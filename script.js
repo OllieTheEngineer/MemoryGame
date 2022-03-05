@@ -1,8 +1,8 @@
 const gameContainer = document.getElementById("game");
-let card1 = "";
-let card2 = "";
-let cardsFlipped = 0; // did not have this initially
-let noClicking = false; //initially i did not have this variable, added it after I saw the solution
+let card1 = undefined;
+let card2 = undefined;
+let noClicking = false;
+
 
 const COLORS = [
   "red",
@@ -63,39 +63,36 @@ function createDivsForColors(colorArray) {
 
 // TODO: Implement this function!
 function handleCardClick(e) {
-  // you can use event.target to see which element was clicked 
+  // you can use event.target to see which element was clicked
   if (noClicking) return;
   if (e.target.classList.contains("flipped")) return;
 
-  this.style.backgroundColor = this.classList
-  if(card1 == "")
-  {
-   card1 = this.style.backgroundColor
-  //  card1 = this
-  }
-  else if (card1 != "" && card2 === "")
-  {
-   card2 = this.style.backgroundColor
-  //  card2 = this
-  }
-  else if(card1 != "" && card2 != "")
-  {
-    if(card1.style.backgroundColor === card2.style.backgroundColor)
-    alert('You have picked the right cards!')
-    {
+  const color = this.classList;
+  this.style.backgroundColor = color;
 
-    } 
+  if (card1 === undefined){
+   card1 = e.target;
+  }
+  else if (card1 !== undefined && card2 === undefined){
+   card2 = e.target;
+  }
+
+  if(card1 &&  card1.style.backgroundColor !== "" && card2 && card2.style.backgroundColor !== ""){
+    if(card1.style.backgroundColor === card2.style.backgroundColor){
+    alert('You have picked the right cards!');
+    card1 = undefined;
+    card2 = undefined;
+  } else {
       setTimeout(function() {
-        card1.style.backgroundColor = "";
-        card2.style.backgroundColor = "";
         card1.classList.remove("flipped");
         card2.classList.remove("flipped");
-        // card1 = "";
-        // card2 = "";
-        noClicking = false;
         alert("You picked the wrong cards")
-      /*Code here to reset the cards*/  
-    }, 1000);
+        card1.removeAttribute("style");
+        card2.removeAttribute("style"); 
+        card1 = undefined;
+        card2 = undefined;
+      }, 500);
+    }
   }
 }
 
